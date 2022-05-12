@@ -25,15 +25,17 @@ class Pages extends BaseController
         $data = [
             'title' => 'Contact Us',
             'alamat' => [
-                'tipe' => 'rumah',
-                'alamat' => 'Jl. Raya Cisarua',
-                'kota' => 'Cisarua',
-            ],
-            [
-                'tipe' => 'kantor',
-                'alamat' => 'Jl. Setia Budi No.193',
-                'Kota' => 'Bandung'
-            ],
+                [
+                    'tipe' => 'rumah',
+                    'alamat' => 'Jl. Raya Cisarua',
+                    'provinsi' => 'Jawa Barat',
+                ],
+                [
+                    'tipe' => 'kantor',
+                    'alamat' => 'Jl. Setia Budi No.193',
+                    'provinsi' => 'Jawa Timur',
+                ]
+            ]
         ];
         return view('pages/contact', $data);
     }
