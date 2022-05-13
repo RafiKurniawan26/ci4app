@@ -36,11 +36,12 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Pages::index');
 
 // routes untuk form validation
-$routes->post('/komik/save', 'Komik::save');
 $routes->get('/komik/create', 'Komik::create');
 
 // routes untuk edit form dari id
 $routes->get('/komik/edit/(:segment)', 'Komik::edit/$1');
+
+$routes->post('komik/save', 'Komik::save');
 
 // routes untuk delete
 $routes->delete('/komik/(:num)', 'Komik::delete/$1');

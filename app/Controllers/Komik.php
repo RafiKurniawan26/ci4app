@@ -34,15 +34,30 @@ class Komik extends BaseController
 
 
     // ################################################################################################
-    public function detail($id)
+    // public function detail($id)
+    // {
+    //     $data = [
+    //         'title' => 'Detail Komik',
+    //         'komik' => $this->komikModel->getKomik($id)
+    //     ];
+    //     // jika komik tidak ada di tabel komik
+    //     if (empty($data['komik'])) {
+    //         throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul Komik ' . $id . ' tidak ditemukan');
+    //     }
+
+
+    //     return view('komik/detail', $data);
+    // }
+
+    public function detail($slug)
     {
         $data = [
             'title' => 'Detail Komik',
-            'komik' => $this->komikModel->getKomik($id)
+            'komik' => $this->komikModel->getKomik($slug)
         ];
         // jika komik tidak ada di tabel komik
         if (empty($data['komik'])) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul Komik ' . $id . ' tidak ditemukan');
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul Komik ' . $slug . ' tidak ditemukan');
         }
 
 

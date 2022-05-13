@@ -11,12 +11,12 @@ class KomikModel extends Model
     protected $allowedFields = ['judul', 'penulis', 'penerbit', 'sampul'];
 
 
-    public function getKomik($id = false)
+    public function getKomik($slug = false)
     {
-        if ($id == false) {
+        if ($slug == false) {
             return $this->findAll();
         }
 
-        return $this->where(['id' => $id])->first();
+        return $this->where(['slug' => $slug])->first();
     }
 }
