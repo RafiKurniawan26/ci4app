@@ -75,12 +75,23 @@ class Komik extends BaseController
                     'required' => '{field} komik harus diisi.',
                     'is_unique' => '{field} komik sudah ada.'
                 ]
+            ],
+            'sampul' => [
+                'rules' => 'uploaded[sampul]|max_size[sampul,1024]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'Pilih gambar terlebih dahulu',
+                    'max_size' => 'ukuran gambar terlalu besar',
+                    'is_image' => 'yang anda pilih bukan gambar',
+                    'mime_in' => 'yang anda pilih bukan gambar'
+                ]
             ]
         ])) {
-            $validation  = \Config\Services::validation();
-            return redirect()->to('komik/create')->withInput()->with('validation', $validation);
+            // $validation  = \Config\Services::validation();
+            // return redirect()->to('komik/create')->withInput()->with('validation', $validation);
+            return redirect()->to('komik/create')->withInput();
         }
 
+        dd('berhasil');
 
         $slug = url_title($this->request->getVar('judul'), '-', true);
         $this->komikModel->save([
@@ -107,11 +118,11 @@ class Komik extends BaseController
 
 
     // ################################################################################################
-    public function edit($id)
+    public function edit($slug)
     {
         $data = [
             'title' => 'Edit Data Komik',
-            'komik' => $this->komikModel->getKomik($id),
+            'komik' => $this->komikModel->getKomik($slug),
             'validation' => \Config\Services::validation()
         ];
 
@@ -119,10 +130,10 @@ class Komik extends BaseController
     }
 
     // ################################################################################################
-    public function update($id_slug)
+    public function update($id)
     {
         // validasi input
-        $komikLama = $this->komikModel->getKomik($this->request->getVar('id'));
+        $komikLama = $this->komikModel->getKomik($this->request->getVar('slug'));
         if ($komikLama['judul'] == $this->request->getVar('judul')) {
             $rule_judul = 'required';
         } else {
@@ -139,12 +150,12 @@ class Komik extends BaseController
             ]
         ])) {
             $validation  = \Config\Services::validation();
-            return redirect()->to('komik/edit' . $this->request->getVar('id'))->withInput()->with('validation', $validation);
+            return redirect()->to('komik/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
         }
 
         $slug = url_title($this->request->getVar('judul'), '-', true);
         $this->komikModel->save([
-            'id' => $id_slug,
+            'id' => $id,
             'judul' => $this->request->getVar('judul'),
             'slug' => $slug,
             'penulis' => $this->request->getVar('penulis'),
