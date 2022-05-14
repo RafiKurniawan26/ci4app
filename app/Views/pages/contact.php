@@ -10,7 +10,7 @@
                 <ul>
                     <li><?= $a['tipe']; ?></li>
                     <li><?= $a['alamat']; ?></li>
-                    <li><?= $a['kota']; ?></li>
+                    <li><?= $a['provinsi']; ?></li>
                 </ul>
             <?php endforeach; ?>
         </div>

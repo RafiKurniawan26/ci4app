@@ -35,6 +35,19 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Pages::index');
 
+// routes untuk form validation
+$routes->post('/komik/save', 'Komik::save');
+$routes->get('/komik/create', 'Komik::create');
+
+// routes untuk edit form dari id
+$routes->get('/komik/edit/(:segment)', 'Komik::edit/$1');
+
+// routes untuk delete
+$routes->delete('/komik/(:num)', 'Komik::delete/$1');
+
+// routes untuk melihat detail komik
+$routes->get('/komik/(:any)', 'Komik::detail/$1');
+
 // $routes->get('/coba/index', 'Coba::index');
 // $routes->get('/coba/about', 'Coba::about');
 // $routes->get('/coba/(:any)', 'Coba::about/$1');
